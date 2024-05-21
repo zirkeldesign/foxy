@@ -80,7 +80,7 @@ abstract class SemverUtil
         $numVer2 = '('.$numVer.'\.'.$numVer.')';
         $numVer3 = '('.$numVer.'\.'.$numVer.'\.'.$numVer.')';
 
-        return '/^'.'('.$numVer.'|'.$numVer2.'|'.$numVer3.')'.$pattern.'/';
+        return '/^('.$numVer.'|'.$numVer2.'|'.$numVer3.')'.$pattern.'/';
     }
 
     /**
@@ -119,7 +119,7 @@ abstract class SemverUtil
 
         $matches = array();
         preg_match('/^[a-z]+/', $end, $matches);
-        $type = isset($matches[0]) ? VersionParser::normalizeStability($matches[0]) : null;
+        $type = isset($matches[0]) ? VersionParser::normalizeStability($matches[0]) : '';
         $end = substr($end, \strlen($type));
 
         return array($type, $version, $end);

@@ -77,8 +77,9 @@ class Foxy implements PluginInterface, EventSubscriberInterface
      * The list of the classes of asset managers.
      */
     private static $assetManagers = array(
-        'Foxy\Asset\YarnManager',
         'Foxy\Asset\NpmManager',
+        'Foxy\Asset\PnpmManager',
+        'Foxy\Asset\YarnManager',
     );
 
     /**
@@ -89,6 +90,7 @@ class Foxy implements PluginInterface, EventSubscriberInterface
         'manager' => null,
         'manager-version' => array(
             'npm' => '>=5.0.0',
+            'pnpm' => '>=7.0.0',
             'yarn' => '>=1.0.0',
         ),
         'manager-bin' => null,
@@ -213,9 +215,9 @@ class Foxy implements PluginInterface, EventSubscriberInterface
      * @param ProcessExecutor $executor The process executor
      * @param Filesystem      $fs       The composer filesystem
      *
-     * @throws RuntimeException When the asset manager is not found
-     *
      * @return AssetManagerInterface
+     *
+     * @throws RuntimeException When the asset manager is not found
      */
     protected function getAssetManager(IOInterface $io, Config $config, ProcessExecutor $executor, Filesystem $fs)
     {
